@@ -6,7 +6,12 @@ const useChatMessage = () => {
 
   //메시지 요청 함수
   const getMessages = async (messagesContent: string) => {
-    const response = await fetch("http://34.22.91.133:80/", {
+    const HOST = process.env.NEXT_PUBLIC_API_HOST;
+    if (!HOST) {
+      throw new Error("API HOST가 존재하지 않습니다.");
+    }
+    console.log(HOST);
+    const response = await fetch(HOST, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
